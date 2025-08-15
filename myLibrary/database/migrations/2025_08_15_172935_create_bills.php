@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->enum('type' , ['borrow' , 'return']);
+            $table->decimal('amount' , 7 ,2);
+            $table->foreignId('customer_id')->constrained();
             $table->timestamps();
         });
     }

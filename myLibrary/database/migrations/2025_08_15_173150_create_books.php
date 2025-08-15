@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->id();
+            $table->char('ISBN' , 13)->primary();
+            $table->string('title' , 70)->index() ;
+            $table->decimal('price', 4, 2)->default(0);
+            $table->decimal('mortgage' , 6,2 )->comment('restored when returned');
+            $table->date('authorship_date')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }
